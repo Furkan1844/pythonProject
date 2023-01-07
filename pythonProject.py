@@ -3,7 +3,6 @@ import os
 def itemDict(): # Makes a dict of items
     pass
 def checkFolderExist(): # Checks if the file exist in the current path through os module
-    getCWD = os.getcwd()
     fileControl = os.listdir()
     filename = "items.json"
     for file in fileControl:
