@@ -5,19 +5,15 @@ def itemDict(): # Makes a dict of items
 def checkFolderExist(): # Checks if the file exist in the current path through os module
     getCWD = os.getcwd()
     fileControl = os.listdir()
-    fileList = []
+    filename = "items.json"
     for file in fileControl:
-        fileList.append(file)
-        if file == 'items.json':
+        if file == "items.json":
             return getInput()
     else:
         yesno = input("File can not found!\nDo you want to create one?(y/n) : ")
-        yesno = ('"' + yesno + '"')
-    if yesno == "y":
-        os.mkdir(getCWD + "\items.json")
-        print("ok")
-
-
+        if yesno == "y":
+            file = open(filename, "w")
+            return getInput()
 
 def getInput(): # Displays options
     print("====================\n Inventory Options\n====================\n")
