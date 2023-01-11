@@ -1,17 +1,39 @@
+"""
+checkFileExist() =
+driveOptions()   = seceneklerin tanimlandigi yer-->addItem, deleteItem, updateQuantity, changeName, exit
+getInput()   = kullanicidan yapmak istedigi islemleri alma-->1 den 5 e kadar secenekler
+addItem() = listeye yeni bir item ekleme
+deleteItem() = listeden item silme
+updateQuantity() = item miktarini guncelleme
+changeName() = item ismini degistirme
+        giveWarnings() = stock tukenmis ise kullaniciya uyari verme
+        checkValidIndex() = girilen index numarasinin listedeki varligini kontrol eder
+"""
+
 import os
+import json
 
+item = {
+        "id" : "",
+        "name" : "",
+        "quantity" : "",
+        "date" : ""
+    }
 
-def checkFolderExist(): # Checks if the file exist in the current path through os module
+def checkFileExist(): # Checks if the file exist in the current path through os module
     fileControl = os.listdir()
-    filename = "items.txt"
+    filename = "items.json"
     for file in fileControl:
-        if file == "items.txt":
+        if file == "items.json":
             return getInput()
     else:
         yesno = input("File can not found!\nDo you want to create one?(y/n) : ")
         if yesno == "y":
-            file = open(filename, "x")
+            with open(filename, "x") as file: # "x", creates a file, returns an error if the file exist
+                file.write("[\n{\n}")
             return getInput()
+        else:
+            pass
     
 def getInput(): # Displays options
     print("====================\n Inventory Options\n====================\n")
@@ -32,34 +54,37 @@ def driveOptions(choice): # Forwards input to function that user chose
     if choice == 5:
         pass
 
+# idNumber = 0
+# while idNumber == idNumber:        ID NUMBER
+#     idNumber += 0
+#     break
+
 def addItem():
-    print("====================\n Adding Item\n====================\n")
-    item = {
-        "id" : "",
-        "name" : None,
-        "quantity" : None,
-        "date" : ""
-    }
+    print("====================\n    Adding Item\n====================\n")
+
+    # item["id"] = ("{}").format(idNumber)            ID NUMBER
     item["name"] = input("Enter item's name : ")
     item["quantity"] = input("Enter item's quantity : ")
-    w = open("items.txt", "a")
-    w.write("\n{\n")
-    for key,value in item.items():
-        w = open("items.txt", "a")
-        w.write(key + " : " + value + "\n")
-    w.write("}")
-    w.close
+    with open("items.json", "a") as openjson:
+        openjson.write(",\n")
+        json.dump(item, openjson, indent=4)
+        openjson.close
+        
+    # for key,value in item.items():
+    #     opentxt.write(key + " : " + value + "\n")
+    # opentxt.close
 
-def writeItemToFile():
-    pass
+def deleteItem():
+    print("====================\n    Deleting Item\n====================\n")
+    dlt = int(input("Enter item's id number that you want to delete : "))
+    with open("items.json") as f:
+        a = json.load(f)
 
-def deleteItem(): # Delete item by id
-    pass
+                
+
 
 def updateQuantity(): # Changes the quantity by id of the item
     pass
 
 def changeName(): # Changes the name by id of the item
     pass
-
-checkFolderExist()
