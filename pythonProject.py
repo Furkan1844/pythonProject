@@ -76,11 +76,16 @@ def addItem():
 
 def deleteItem():
     print("====================\n    Deleting Item\n====================\n")
-    dlt = int(input("Enter item's id number that you want to delete : "))
-    with open("items.json") as f:
-        a = json.load(f)
-
-                
+    # dlt = int(input("Enter item's id number that you want to delete : "))
+    # x = open("items.json")
+    # a = json.loads(open("items.json"))
+    # for i, key in enumerate(a):
+    #     print(i, key)
+    # print(a[1])
+    # a.remove(a[1])
+    # print(a[1])
+    # json.loads(open("items.json"))
+    # x.close
 
 
 def updateQuantity(): # Changes the quantity by id of the item
@@ -88,3 +93,5 @@ def updateQuantity(): # Changes the quantity by id of the item
 
 def changeName(): # Changes the name by id of the item
     pass
+
+checkFileExist()
