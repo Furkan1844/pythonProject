@@ -30,7 +30,6 @@ def checkFileExist(): # Checks if the file exist in the current path through os 
                     loadItemDict["id"] = 0
                     elmntsOfJson.append(loadItemDict)
                     jsonDump(returnFile)
-                return getInput()
             else:
                 print("File couldn't created.")
     except:
@@ -48,7 +47,8 @@ def getInput(): # Displays options
         else:
             driveOptions(choice)
     except:
-        pass
+        print("Please enter valid number!\n")
+        return getInput()
 
 def driveOptions(choice): # Forwards input to function that user chose
     try:
@@ -61,7 +61,7 @@ def driveOptions(choice): # Forwards input to function that user chose
         if choice == 4:
             changeName()
         if choice == 5:
-            pass
+            print("\nGoodbye for now...\n")
     finally:
         pass
 
@@ -76,8 +76,8 @@ def addItem():
     item["id"] = idNum
     item["name"] = input("Enter the name of item : ")
     item["quantity"] = int(input("Enter the quantity of item : "))
-    # day = datetime.today()
-    # item["date"] = day
+    day = datetime.now()
+    item["date"] = day.strftime("%d-%m-%Y, %X")
     
     with open(fn) as jsonFile:
         returnFile = json.load(jsonFile)
@@ -91,6 +91,7 @@ def jsonDump(data):
     with open(fn, "w") as f:
         json.dump(data, f, indent= 4)
     f.close
+    return getInput()
 
 def deleteItem():
     print("====================\n   Deleting Item\n====================\n")
@@ -109,3 +110,8 @@ def updateQuantity(): # Changes the quantity by id of the item
 
 def changeName(): # Changes the name by id of the item
     pass
+
+def giveWarning(): # Gives warning when the stock out of run
+    pass
+
+checkFileExist()
